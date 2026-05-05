@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini TCG</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<button id="help-btn" type="button">Comment jouer</button>
+
+<div id="lobby">
+    <div class="lobby-card">
+        <h1>Chroniques TCG</h1>
+        <p>Un duel historique entre deux civilisations. Choisis ton camp, joue tes cartes et réduis les PV adverses à 0.</p>
+        <button id="enter-game-btn" type="button">Jouer</button>
+        <button type="button" disabled>Collection — bientôt</button>
+        <button type="button" disabled>Deck builder — bientôt</button>
+        <button type="button" disabled>Options — bientôt</button>
+    </div>
+</div>
+
+<div id="help-modal" class="hidden">
+    <div class="help-card">
+        <h2>Comment jouer</h2>
+        <p><strong>Main Phase :</strong> tu peux poser 1 personnage par tour. Tu peux aussi activer autant de magies normales que tu veux.</p>
+        <p><strong>Cartes Terrain :</strong> elles se posent uniquement dans la zone Terrain et leurs effets permanents s’appliquent automatiquement.</p>
+        <p><strong>Battle Phase :</strong> sélectionne un de tes personnages, clique sur Déclarer attaque, puis clique sur un personnage adverse.</p>
+        <p>Si l’adversaire n’a plus de personnages, clique sur <strong>Attaque directe</strong> pour viser ses PV.</p>
+        <p>Une carte en défense ne peut pas attaquer, sauf si un effet l’autorise.</p>
+        <button id="close-help-btn" type="button">Fermer</button>
+    </div>
+</div>
+
+<div id="side-selector" class="hidden">
+    <h2>Choisis ton camp</h2>
+    <button type="button" data-player="A">Jouer Asie</button>
+    <button type="button" data-player="B">Jouer Europe</button>
+</div>
+
+
+<div id="game-ui" class="hidden">
+    <div id="opponent-life" class="life-display opponent-life"></div>
+    <div id="player-life" class="life-display player-life"></div>
+    <div id="game">
+        <div class="side opponent">
+            <h2 id="opponent-title">Adversaire</h2>
+            <div class="row">
+                <div class="side-column">
+                    <div class="deck" id="opponent-deck">Deck</div>
+                    <div class="zone" id="opponent-graveyard">Cimetière</div>
+                </div>
+                <div class="board-center">
+                    <div id="opponent-back" class="slots"></div>
+                    <div id="opponent-monsters" class="monster-grid"></div>
+                </div>
+                <div class="terrain-slot" id="opponent-field">Terrain</div>
+            </div>
+        </div>
+
+        <div id="center-hud">
+            <div id="message"></div>
+            <div id="phase-panel">
+                <div class="phase-track" id="phase-track">
+                    <div class="phase-step" data-phase="draw">Draw</div>
+                    <div class="phase-step" data-phase="main">Main</div>
+                    <div class="phase-step" data-phase="battle">Battle</div>
+                    <div class="phase-step" data-phase="end">End</div>
+                </div>
+                <div id="phase-info"></div>
+                <div id="phase-buttons">
+                    <button id="draw-btn" type="button">Piocher</button>
+                    <button id="next-phase-btn" type="button">Phase suivante</button>
+                </div>
+                <div id="action-panel">
+                    <button id="activate-btn" type="button">Activer</button>
+                    <button id="attack-btn" type="button">Déclarer attaque</button>
+                    <button id="direct-attack-btn" type="button">Attaque directe</button>
+                </div>
+                <div id="summon-mode" class="hidden">
+                    <span>Position :</span>
+                    <button type="button" data-position="attack" class="active">Attaque</button>
+                    <button type="button" data-position="defense">Défense</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="side player">
+            <h2 id="player-title">Joueur</h2>
+            <div class="row">
+                <div class="terrain-slot" id="player-field">Terrain</div>
+                <div class="board-center">
+                    <div id="player-monsters" class="monster-grid"></div>
+                    <div id="player-back" class="slots"></div>
+                </div>
+                <div class="side-column">
+                    <div class="zone" id="player-graveyard">Cimetière</div>
+                    <div class="deck" id="player-deck">Deck</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h2>Main</h2>
+    <div id="hand"></div>
+</div>
+
+<div id="card-preview"></div>
+<button id="reset-btn" type="button">Reset</button>
+<script src="script.js"></script>
+</body>
+</html>
